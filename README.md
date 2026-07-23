@@ -17,11 +17,11 @@ A real-time digital and analog clock built with HTML, CSS, and vanilla JavaScrip
 1. Clone the repo
 2. Open `index.html` in any browser
    or
-3. View the live demo: [Live Demo](https://diksha-wadekar.github.io/digital-analog-clocks/)
+3. View Digital Clock: [Live Demo](https://diksha-wadekar.github.io/digital-analog-clocks/)
 
 ## Screenshots
 Digital Clock:
-![Digital Clock](screenshot-digital.png)
+![Digital Clock](digital-clock.png)
 
 Analog Clock:
-![Analog Clock](screenshot-analog.png)
+![Analog Clock](analog-clock.png)
