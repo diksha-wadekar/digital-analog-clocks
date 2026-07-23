@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clock</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  .clock-box {
+    background: #be4242;
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  #time {
+    font-size: 60px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 3px;
+    font-family: 'Courier New', monospace;
+  }
+
+  #time span {
+    color: #fc5c7d;
+  }
+
+  #date {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #d1d1e9;
+  }
+  
+  body {
+  position: relative;
+  overflow: hidden; /* keeps the blurred orbs from causing scrollbars */
+  background: linear-gradient(135deg, #1e1e2f, #2d2b3a, #3a3450);
+}
+
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+body::before {
+  width: 380px;
+  height: 380px;
+  background: #503f77; 
+  top: -100px;
+  left: -80px;
+   animation: drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  to { transform: translate(30px, 20px); }
+}
+
+body::after {
+  width: 320px;
+  height: 320px;
+  background: #fbc2eb; 
+  bottom: -100px;
+  right: -60px;
+}
+
+.clock,
+.made-by {
+  position: relative;
+  z-index: 1; 
+}
+</style>
+</head>
+<body>
+
+  <div class="clock-box">
+    <div id="time">00:00:00</div>
+    <div id="date">Loading date...</div>
+  </div>
+
+<script>
+  const timeEl = document.getElementById('time');
+  const dateEl = document.getElementById('date');
+
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // add a leading zero if the number is less than 10
+  function pad(num) {
+    return num < 10 ? '0' + num : num;
+  }
+
+  function updateClock() {
+    const now = new Date();
+
+    let hours = now.getHours();
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    if (hours === 0) hours = 12; // 0 should display as 12
+
+    // blink the colons every other second
+    const colon = now.getSeconds() % 2 === 0 ? ':' : ' ';
+
+    timeEl.innerHTML = `${pad(hours)}${colon}${minutes}${colon}${seconds} <span>${ampm}</span>`;
+
+    const dayName = days[now.getDay()];
+    const monthName = months[now.getMonth()];
+    dateEl.textContent = `${dayName}, ${now.getDate()} ${monthName} ${now.getFullYear()}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
 
